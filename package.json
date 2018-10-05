@@ -1,0 +1,23 @@
+{
+  "name": "python-black-isort",
+  "main": "./lib/python-black-isort",
+  "version": "0.0.0",
+  "description": "Run isort then black on the current python file.",
+  "keywords": [],
+  "repository": "git@github.com:paradoxxxzero/atom-python-black-isort",
+  "license": "MIT",
+  "engines": {
+    "atom": "*"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 9,
+      "sourceType": "module"
+    }
+  },
+  "devDependencies": {
+    "eslint": "^4.14.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-react": "^7.5.1"
+  }
+}
