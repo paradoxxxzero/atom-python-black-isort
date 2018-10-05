@@ -1,7 +1,7 @@
 {
   "name": "python-black-isort",
   "main": "./lib/python-black-isort",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Run isort then black on the current python file.",
   "keywords": [],
   "repository": "git@github.com:paradoxxxzero/atom-python-black-isort",
