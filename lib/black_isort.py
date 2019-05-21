@@ -137,18 +137,27 @@ class Commands(object):
             return source
 
         line_length = config.pop("line_length", black.DEFAULT_LINE_LENGTH)
+        versions = (
+            set(
+                [
+                    black.TargetVersion[v.upper()]
+                    for v in config.get('target_version')
+                ]
+            )
+            if config.get('target_version')
+            else set()
+        )
+        pyi = config.get("pyi")
+        skip_string_normalization = config.get("skip_string_normalization")
 
-        mode = black.FileMode.AUTO_DETECT
-        if config.get("py36"):
-            mode |= black.FileMode.PYTHON36
-        if config.get("pyi"):
-            mode |= black.FileMode.PYI
-        if config.get("skip_string_normalization"):
-            mode |= black.FileMode.NO_STRING_NORMALIZATION
-        if config.get("skip_numeric_underscore_normalization"):
-            mode |= black.FileMode.NO_NUMERIC_UNDERSCORE_NORMALIZATION
+        mode = black.FileMode(
+            target_versions=versions,
+            line_length=line_length,
+            is_pyi=pyi,
+            string_normalization=not skip_string_normalization,
+        )
 
-        return black.format_str(source, line_length=line_length, mode=mode)
+        return black.format_str(source, mode=mode)
 
 
 if __name__ == "__main__":
