@@ -106,8 +106,9 @@ class Commands(object):
                     import configparser
 
                     config = configparser.ConfigParser()
-                    config.read_file(path)
-                    if config.has_section('tool:isort'):
+                    with open(path) as fp:
+                        config.read_file(fp)
+                    if config.has_section('isort') or config.has_section('tool:isort'):
                         has_conf = True
             if not has_conf:
                 return source
