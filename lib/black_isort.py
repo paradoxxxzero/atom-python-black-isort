@@ -108,15 +108,17 @@ class Commands(object):
                     config = configparser.ConfigParser()
                     with open(path) as fp:
                         config.read_file(fp)
-                    if config.has_section('isort') or config.has_section('tool:isort'):
+                    if config.has_section('isort') or config.has_section(
+                        'tool:isort'
+                    ):
                         has_conf = True
             if not has_conf:
                 return source
 
-        return isort.SortImports(
-            settings_path=os.path.dirname(os.path.abspath(self.file_path)),
-            file_contents=source,
-        ).output
+        return isort.code(
+            code=source,
+            config=isort.settings.Config(settings_path=root),
+        )
 
     def black(self, source):
         has_conf = False
